@@ -8,6 +8,7 @@ import useUser from "@/hooks/useUser";
 
 import Input from "../Input";
 import Modal from "../Modal";
+import ImageUpload from "../ImageUpload";
 
 const EditModal = () => {
   const { data: currentUser } = useCurrentUser();
@@ -26,16 +27,11 @@ const EditModal = () => {
     setName(currentUser?.name)
     setUsername(currentUser?.username)
     setBio(currentUser?.bio)
-  }, [
-    currentUser?.name, 
-    currentUser?.username, 
-    currentUser?.bio, 
-    currentUser?.profileImage, 
-    currentUser?.coverImage]);
+  }, [currentUser?.name, currentUser?.username, currentUser?.bio, currentUser?.profileImage, currentUser?.coverImage]);
+  
+  const [isLoading, setIsLoading] = useState(false);
 
-    const [isLoading, setIsLoading] = useState(false);
-
-    const onSubmit = useCallback(async () => {
+  const onSubmit = useCallback(async () => {
     try {
       setIsLoading(true);
 
@@ -52,28 +48,30 @@ const EditModal = () => {
     }
   }, [editModal, name, username, bio, mutateFetchedUser, profileImage, coverImage]);
 
-    const bodyContent = (
-        <div className="flex flex-col gap-4">
-            <Input
-                placeholder="Name"
-                onChange={(e) => setName(e.target.value)}
-                value={name}
-                disabled={isLoading}  
-            />
-            <Input 
-                placeholder="Username"
-                onChange={(e) => setUsername(e.target.value)}
-                value={username}
-                disabled={isLoading} 
-            />
-            <Input 
-                placeholder="Bio"
-                onChange={(e) => setBio(e.target.value)}
-                value={bio}
-                disabled={isLoading} 
-            />
-        </div>
-    )
+  const bodyContent = (
+    <div className="flex flex-col gap-4">
+      <ImageUpload value={profileImage} disabled={isLoading} onChange={(image) => setProfileImage(image)} label="Upload profile image" />
+      <ImageUpload value={coverImage} disabled={isLoading} onChange={(image) => setCoverImage(image)} label="Upload cover image" />
+      <Input
+        placeholder="Name"
+        onChange={(e) => setName(e.target.value)}
+        value={name}
+        disabled={isLoading}  
+      />
+      <Input 
+        placeholder="Username"
+        onChange={(e) => setUsername(e.target.value)}
+        value={username}
+        disabled={isLoading} 
+      />
+      <Input 
+        placeholder="Bio"
+        onChange={(e) => setBio(e.target.value)}
+        value={bio}
+        disabled={isLoading} 
+      />
+    </div>
+  )
 
   return (
     <Modal
