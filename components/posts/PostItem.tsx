@@ -123,7 +123,7 @@ const PostItem: React.FC<PostItemProps> = ({ data = {}, userId }) => {
             ">
               <LikeIcon color={hasLiked ? 'red' : ''} size={20} />
               <p>
-                {data.linkedIds.length || 0}
+                {data.linkedIds.length}
               </p>
             </div>
           </div>
