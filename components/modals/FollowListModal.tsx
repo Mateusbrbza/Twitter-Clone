@@ -5,11 +5,11 @@ import Avatar from "../Avatar";
 import Modal from "../Modal";
 
 interface FollowListModalProps {
-    isOpen: boolean;
-    title: string;
-    actionLabel: string;
-    users: any[];
-    onClose: () => void;
+  isOpen: boolean;
+  title: string;
+  actionLabel: string;
+  users: any[];
+  onClose: () => void;
 }
 
 const FollowListModal: React.FC<FollowListModalProps> = ({
@@ -21,18 +21,20 @@ const FollowListModal: React.FC<FollowListModalProps> = ({
 }) => {
   const router = useRouter();
 
-    const handleClick = useCallback((event: any, userId: any) => {
-        event.stopPropagation();
+  const handleClick = useCallback(
+    (event: any, userId: any) => {
+      event.stopPropagation();
 
-        const url = `/users/${userId}`;
+      const url = `/users/${userId}`;
 
-        onClose();
+      onClose();
 
-        router.push(url);
-    }, [router, onClose]
-    );
+      router.push(url);
+    },
+    [router, onClose]
+  );
 
-    const bodyContent = (
+  const bodyContent = (
     <div>
       <div className=" border-[1px] border-neutral-900">
         <div className="flex flex-col  ">
