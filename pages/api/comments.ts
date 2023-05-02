@@ -25,7 +25,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
     });
 
-    // NOTIFICATION PART START
+    // NOTIFICATION START
     try {
       const post = await prisma.post.findUnique({
         where: {
@@ -54,7 +54,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     catch (error) {
       console.log(error);
     }
-    // NOTIFICATION PART END
+    // NOTIFICATION END
 
     return res.status(200).json(comment);
   } catch (error) {

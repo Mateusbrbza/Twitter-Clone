@@ -27,10 +27,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       throw new Error('Invalid ID');
     }
 
-    let updatedLinkedIds = [...(post.linkedIds || [])];
+    let updatedLikedIds = [...(post.likedIds || [])];
 
     if (req.method === 'POST') {
-      updatedLinkedIds.push(currentUser.id);
+      updatedLikedIds.push(currentUser.id);
       
       // NOTIFICATION PART START
       try {
@@ -64,7 +64,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     if (req.method === 'DELETE') {
-      updatedLinkedIds = updatedLinkedIds.filter((likedId) => likedId !== currentUser?.id);
+      updatedLikedIds = updatedLikedIds.filter((likedId) => likedId !== currentUser?.id);
     }
 
     const updatedPost = await prisma.post.update({
@@ -72,7 +72,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         id: postId
       },
       data: {
-        linkedIds: updatedLinkedIds
+        likedIds: updatedLikedIds,
       }
     });
 
