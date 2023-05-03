@@ -27,12 +27,6 @@ const Sidebar = () => {
       alert: currentUser?.hasNotification,
     },
     {
-      label: "Messages",
-      href: "/messages",
-      icon: GrMail,
-      auth: true,
-    },
-    {
       label: "Profile",
       href: `/users/${currentUser?.id}`,
       icon: FaUser,
